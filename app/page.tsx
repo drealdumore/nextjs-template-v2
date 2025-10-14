@@ -1,40 +1,4 @@
-"use client";
-
-import { useState, useEffect, useRef } from "react";
-
 export default function Home() {
-  const [loading, setLoading] = useState(false);
-  const timerRef = useRef<number | null>(null);
-
-  const handleGetStarted = () => {
-    setLoading(true);
-    // Clear any existing timer so repeated clicks don't create multiple timers
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-
-    const id = window.setTimeout(() => {
-      // Only update state if this timer is still the active one
-      if (timerRef.current === id) {
-        setLoading(false);
-        // clear the ref since the timer has completed
-        timerRef.current = null;
-      }
-    }, 1000);
-
-    timerRef.current = id;
-  };
-
-  // Cleanup on unmount: clear any pending timer to avoid setting state on unmounted component
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, []);
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4">
@@ -49,14 +13,8 @@ export default function Home() {
         </header>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-          <button
-            onClick={handleGetStarted}
-            disabled={loading}
-            className={`btn-primary px-6 py-3 bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 rounded-lg font-medium ${
-              loading ? "loading" : ""
-            }`}
-          >
-            {loading ? "⏳ Loading..." : "🚀 Get Started"}
+          <button className="btn-primary px-6 py-3 bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 rounded-lg font-medium">
+            🚀 Get Started
           </button>
           <button className="btn-secondary px-6 py-3 border border-neutral-300 dark:border-neutral-700 rounded-lg font-medium hover:bg-neutral-50 dark:hover:bg-neutral-900">
             📚 Learn More
