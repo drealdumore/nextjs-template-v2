@@ -85,48 +85,40 @@ html.lenis body {
 }
 
 /* UX Improvements */
-.btn-primary {
+.btn-primary.btn-primary {
   position: relative;
   overflow: hidden;
   transform: translateY(0);
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-primary:hover {
+.btn-primary.btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.btn-primary:active {
+.btn-primary.btn-primary:active {
   transform: translateY(0);
-  transition: all 0.1s ease;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.btn-secondary {
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-.btn-secondary:hover {
-  transform: translateY(-1px);
-}
-
-.card {
-  transition: all 0.3s ease;
+.card.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
-.card:hover {
+.card.card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-.card:hover .card-icon {
+.card.card:hover .card-icon {
   transform: scale(1.1);
 }
 
-.card-icon {
-  transition: transform 0.2s ease;
+.card .card-icon {
+  transition: transform 0.2s ease, color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
 }
 
 /* Loading states */
@@ -136,8 +128,14 @@ html.lenis body {
 }
 
 /* Smooth transitions */
-* {
-  transition-property: color, background-color, border-color, opacity, transform;
+/* Apply transitions only to interactive elements and theme changes */
+a,
+button:not(.btn-primary):not(.btn-secondary),
+input,
+select,
+textarea,
+[role="button"]:not(.btn-primary):not(.btn-secondary) {
+  transition-property: color, background-color, border-color, opacity;
   transition-duration: 0.15s;
   transition-timing-function: ease-in-out;
 }

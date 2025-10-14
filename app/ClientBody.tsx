@@ -8,7 +8,7 @@ export default function ClientBody({
   children: React.ReactNode;
 }) {
   const lenisRef = useRef<any>(null);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
     let mounted = true;
@@ -33,7 +33,7 @@ export default function ClientBody({
         rafRef.current = requestAnimationFrame(raf);
       }
 
-      rafRef.current = requestAnimationFrame(raf);
+      rafRef.current = requestAnimationFrame((time) => raf(time));
     };
 
     initLenis();
